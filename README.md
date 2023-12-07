@@ -29,7 +29,7 @@ Make sure you are in the directory where requirements.txt is located before runn
 
 Before running the application, you need to download the model file from HuggingFace and store it in the same directory as app_with_ingest.py. Use this link to download the model:
 https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/blob/main/mistral-7b-instruct-v0.1.Q8_0.gguf
-
+You can play with other models as well.
 After downloading the model, navigate to your code directory:
 ```
 cd .\your code directory
