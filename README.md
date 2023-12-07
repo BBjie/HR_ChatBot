@@ -25,6 +25,10 @@ pip install -r requirements.txt
 ```
 Make sure you are in the directory where requirements.txt is located before running this command.
 
+## Installing Torch
+If you want to work with your GPU, here is the link you might want to refer to:
+https://pytorch.org/get-started/locally/
+
 ## Running ChatBot Application in Terminal
 
 Before running the application, you need to download the model file from HuggingFace and store it in the same directory as app_with_ingest.py. Use this link to download the model:
