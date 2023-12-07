@@ -1,0 +1,7 @@
+flask
+transformers
+torch
+chromadb
+langchain
+pypdf
+sentence-transformers
