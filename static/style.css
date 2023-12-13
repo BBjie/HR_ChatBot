@@ -10,7 +10,7 @@ body, html {
 	margin-bottom: auto;
 }
 .card {
-    height: 500px;
+    height: 850px;
     border-radius: 15px !important;
     background-color: rgba(173, 216, 230, 0.4) !important; /* Light blue color */
 }
@@ -89,8 +89,8 @@ border-radius: 0 0 15px 15px !important;
 	background-color: rgba(0,0,0,0.3);
 }
 .user_img{
-	height: 70px;
-	width: 70px;
+	height: 100px;
+	width: 100px;
 	border:1.5px solid #f5f6fa;
 
 }
@@ -102,8 +102,8 @@ border-radius: 0 0 15px 15px !important;
 }
 .img_cont{
 	position: relative;
-	height: 70px;
-	width: 70px;
+	height: 90px;
+	width: 120px;
 }
 .img_cont_msg{
 	height: 40px;

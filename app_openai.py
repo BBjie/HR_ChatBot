@@ -17,6 +17,7 @@ import os
 import time
 from langchain.document_loaders import DirectoryLoader, PyPDFLoader
 import config 
+import glob
 
 
 app = Flask(__name__)
@@ -25,18 +26,45 @@ app = Flask(__name__)
 openai.api_key = config.API_KEY
 
 
-loader = DirectoryLoader('data/', glob="**/*.pdf", show_progress=True, loader_cls=PyPDFLoader)
-data = loader.load()
+# Get list of all PDF files in the directory
+pdf_files = glob.glob('data/**/*.pdf', recursive=True)
+pdf_files.sort(key=os.path.getmtime, reverse=True)
 
+all_data = [PyPDFLoader(file).load() for file in pdf_files]
 
+# Store data from the most recent file separately
+recent_data = all_data[0]
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
 
+# Process all data
 all_docs = []
-for page in data:
+for data in all_data:
+    for page in data:
+        texts = text_splitter.split_text(page.page_content)
+        docs = [Document(page_content=t) for t in texts]
+        all_docs.extend(docs)
+
+# Process recent data
+recent_docs = []
+for page in recent_data:
     texts = text_splitter.split_text(page.page_content)
     docs = [Document(page_content=t) for t in texts]
-    all_docs.extend(docs)
+    recent_docs.extend(docs)
+
+# When retrieving information, first check recent_docs, then check all_docs
+def retrieve_information(query):
+    # Check recent_docs
+    for doc in recent_docs:
+        if query in doc.page_content:
+            return doc
+
+    # If not found, check all_docs
+    for doc in all_docs:
+        if query in doc.page_content:
+            return doc
+
+    return None
 
 
 
@@ -104,6 +132,3 @@ def get_Chat_response(text):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
-
-
-
