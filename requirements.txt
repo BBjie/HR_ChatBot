@@ -6,3 +6,5 @@ langchain
 pypdf
 sentence-transformers
 ctransformers
+tiktoken
+openai
